@@ -103,10 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Controle de modo de jogo
     function toggleGameMode() {
-        // Alterna entre 2 jogadores e vs CPU
-        gameMode = gameMode === '2players' ? 'cpu' : '2players';
-        modeToggle.textContent = `Modo: ${gameMode === '2players' ? '2 Jogadores' : 'vs CPU'}`;
-        difficultyButton.style.display = gameMode === 'cpu' ? 'block' : 'none';
+        // Alterna entre 2 jogadores e vs IA
+        gameMode = gameMode === '2players' ? 'ia' : '2players';
+        modeToggle.textContent = `Modo: ${gameMode === '2players' ? '2 Jogadores' : 'vs IA'}`;
+        difficultyButton.style.display = gameMode === 'ia' ? 'block' : 'none';
         updateGameModeHelp();
         restartGame();
     }
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateGameModeHelp() {
         gameModeHelpElement.textContent = gameMode === '2players'
             ? 'Modo: 2 Jogadores'
-            : `Modo: vs CPU (${difficulties[difficultyValues.indexOf(difficulty)]})`;
+            : `Modo: vs IA (${difficulties[difficultyValues.indexOf(difficulty)]})`;
     }
 
     // Lógica principal do jogo
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Processa clique em uma célula
         const cellIndex = parseInt(event.target.getAttribute('data-index'));
         if (gameBoard[cellIndex] !== '' || !gameActive) return;
-        if (gameMode === 'cpu' && currentPlayer !== 'X') return;
+        if (gameMode === 'ia' && currentPlayer !== 'X') return;
 
         makeMove(cellIndex, currentPlayer);
     }
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateGameUI();
 
             // Jogada da IA se necessário
-            if (gameMode === 'cpu' && currentPlayer === 'O') {
+            if (gameMode === 'ia' && currentPlayer === 'O') {
                 setTimeout(makeAIMove, 800);
             }
         }
@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
             turnIndicator.innerHTML = '<strong>Deu velha!</strong> 🏁';
             gameStatusElement.style.borderLeftColor = 'var(--draw-color)';
         } else {
-            turnIndicator.innerHTML = `<strong>${winner === 'X' ? 'Jogador X' : (gameMode === '2players' ? 'Jogador O' : 'CPU')} venceu!</strong> 🎉`;
+            turnIndicator.innerHTML = `<strong>${winner === 'X' ? 'Jogador X' : (gameMode === '2players' ? 'Jogador O' : 'IA')} venceu!</strong> 🎉`;
             gameStatusElement.style.borderLeftColor = winner === 'X' ? 'var(--x-color)' : 'var(--o-color)';
             launchConfetti();
         }
@@ -365,8 +365,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateTurnIndicator() {
-        if (gameMode === 'cpu' && currentPlayer === 'O') {
-            turnIndicator.innerHTML = 'Vez da <strong>CPU (O)</strong> <span class="cpu-thinking">...</span>';
+        if (gameMode === 'ia' && currentPlayer === 'O') {
+            turnIndicator.innerHTML = 'Vez da <strong>IA (O)</strong> <span class="ia-thinking">...</span>';
         } else {
             turnIndicator.innerHTML = `É a vez do <strong>Jogador ${currentPlayer}</strong>`;
         }
@@ -377,8 +377,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!gameActive) return;
 
-        if (gameMode === 'cpu' && currentPlayer === 'O') {
-            gameStatusElement.classList.add('status-cpu');
+        if (gameMode === 'ia' && currentPlayer === 'O') {
+            gameStatusElement.classList.add('status-ia');
             gameStatusElement.style.borderLeftColor = 'var(--o-color)';
         } else {
             gameStatusElement.classList.add(currentPlayer === 'X' ? 'status-player-x' : 'status-player-o');
