@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- METADADOS E CONFIGURAÇÕES DA PÁGINA -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jogo da Velha</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ESTRUTURA PRINCIPAL DO JOGO -->
+    <div class="page-wrapper">
+        <div class="background-effect"></div>
+        
+        <div class="container">
+            <!-- CABEÇALHO COM TÍTULO E BOTÃO DE TEMA -->
+            <div class="header">
+                <h1>Jogo da Velha</h1>
+                <button id="theme-toggle" aria-label="Alternar tema">🌙</button> <!-- Alterna entre tema claro/escuro -->
+            </div>
+            
+            <!-- CONTROLES DE MODO (2 JOGADORES VS CPU) -->
+            <div class="game-controls">
+                <button id="mode-toggle" class="active-mode">Modo: 2 Jogadores</button> <!-- Alterna entre modos -->
+                <button id="difficulty" style="display:none;">Dificuldade: Fácil</button> <!-- Só aparece no modo vs CPU -->
+            </div>
+
+            <!-- INDICADOR DE STATUS (TURNO DO JOGADOR) -->
+            <div id="game-status" class="game-status status-player-x">
+                <div id="turn-indicator">É a vez do <strong>Jogador X</strong></div> <!-- Mostra quem joga agora -->
+                <small id="game-mode-help">Modo: 2 Jogadores</small> <!-- Explica o modo atual -->
+            </div>
+            
+            <!-- PLACAR (VITÓRIAS DE X, O E EMPATES) -->
+            <div class="scoreboard">
+                <div class="score" id="score-x">X: 0</div>
+                <div class="score" id="score-o">O: 0</div>
+                <div class="score" id="score-draw">Velhas: 0</div>
+            </div>
+            
+            <!-- TABULEIRO DO JOGO (9 CÉLULAS) -->
+            <div class="game-board">
+                <!-- Cada célula tem um atributo 'data-index' para identificação no JavaScript -->
+                <div class="cell" data-index="0"></div>
+                <div class="cell" data-index="1"></div>
+                <div class="cell" data-index="2"></div>
+                <div class="cell" data-index="3"></div>
+                <div class="cell" data-index="4"></div>
+                <div class="cell" data-index="5"></div>
+                <div class="cell" data-index="6"></div>
+                <div class="cell" data-index="7"></div>
+                <div class="cell" data-index="8"></div>
+            </div>
+            
+            <!-- BOTÕES DE AÇÃO -->
+            <button id="restart">Reiniciar jogo</button> <!-- Reseta o jogo atual -->
+            <button id="help-button" class="help-button">Ajuda</button> <!-- Abre o modal de ajuda -->
+        </div>
+    </div>
+
+    <!-- MODAL DE AJUDA -->
+    <div class="help-modal">
+        <div class="help-content">
+            <h2>🎮 Como Jogar</h2>
+            <ul>
+                <li><strong>Modo 2 Jogadores:</strong> Alterna entre X e O</li>
+                <li><strong>Modo vs CPU:</strong> Você joga como X contra a IA</li>
+                <li><strong>Dificuldades:</strong>
+                    <ul>
+                        <li>🟢 Fácil: Movimentos aleatórios</li>
+                        <li>🟡 Médio: Bloqueia suas jogadas</li>
+                        <li>🔴 Difícil: Estratégia avançada</li>
+                    </ul>
+                </li>
+                <li>🌙 Botão lua/sol alterna temas</li>
+                <li>🏆 Placar salva suas vitórias</li>
+            </ul>
+            <button class="close-help">Entendi!</button> <!-- Fecha o modal -->
+        </div>
+    </div>
+
+    <!-- BIBLIOTECAS EXTERNAS E SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script> <!-- Efeitos de confete (provavelmente usado em vitórias) -->
+    <script src="script.js"></script>
+</body>
+</html>
